@@ -10,6 +10,7 @@ import { toast } from "sonner";
 import TopNavBar from "@/components/home/TopNavBar";
 import { GithubIcon } from "@hugeicons/core-free-icons";
 import { HugeiconsIcon } from "@hugeicons/react";
+import { motion } from "framer-motion";
 
 export default function HomeClient() {
   const { data: user } = useMe();
@@ -127,80 +128,21 @@ export default function HomeClient() {
         {/* Hero Section */}
         <section className="w-full relative bg-background-sendlib pt-28 pb-16 md:pt-48 md:pb-32 px-4 md:px-margin-desktop flex flex-col items-center justify-center overflow-hidden">
           <div className="relative w-full max-w-8xl mx-auto flex flex-col items-center justify-center rounded-[2.5rem] md:rounded-none bg-surface-container md:bg-transparent border border-white/10 md:border-none shadow-2xl md:shadow-none overflow-hidden md:overflow-visible px-6 py-16 md:p-0">
-            {/* Ambient Background Blurred Blocks - Out of focus shapes */}
-            <div className="absolute left-[5%] top-[15%] w-[350px] h-[350px] pointer-events-none opacity-10 md:opacity-30 blur-md md:blur-lg z-0">
-              <Image
-                src="/block.svg"
-                alt=""
-                fill
-                priority
-                aria-hidden
-                style={{ objectFit: "contain", transform: "rotate(-15deg)" }}
-              />
-            </div>
-            <div className="absolute left-[25%] top-[-10%] w-[250px] h-[250px] pointer-events-none opacity-15 md:opacity-40 blur-sm md:blur-md z-0">
-              <Image
-                src="/block.svg"
-                alt=""
-                fill
-                priority
-                aria-hidden
-                style={{ objectFit: "contain", transform: "rotate(45deg)" }}
-              />
-            </div>
-            <div className="absolute left-[30%] bottom-[5%] w-[400px] h-[400px] pointer-events-none opacity-10 md:opacity-20 blur-lg md:blur-xl z-0">
-              <Image
-                src="/block.svg"
-                alt=""
-                fill
-                priority
-                aria-hidden
-                style={{ objectFit: "contain", transform: "rotate(90deg)" }}
-              />
-            </div>
-            <div className="absolute right-[10%] top-[-5%] w-[300px] h-[300px] pointer-events-none opacity-10 md:opacity-30 blur-md md:blur-lg z-0">
-              <Image
-                src="/block.svg"
-                alt=""
-                fill
-                priority
-                aria-hidden
-                style={{ objectFit: "contain", transform: "rotate(-45deg)" }}
-              />
-            </div>
-            <div className="absolute right-[25%] bottom-[15%] w-[280px] h-[280px] pointer-events-none opacity-15 md:opacity-40 blur-sm md:blur-md z-0">
-              <Image
-                src="/block.svg"
-                alt=""
-                fill
-                priority
-                aria-hidden
-                style={{ objectFit: "contain", transform: "rotate(120deg)" }}
-              />
-            </div>
-            <div className="absolute right-[15%] top-[35%] w-[350px] h-[350px] pointer-events-none opacity-10 md:opacity-20 blur-lg md:blur-xl z-0">
-              <Image
-                src="/block.svg"
-                alt=""
-                fill
-                priority
-                aria-hidden
-                style={{ objectFit: "contain", transform: "rotate(180deg)" }}
-              />
-            </div>
-
-            {/* Sharp Edge Foreground Blocks - Perfectly Horizontally Aligned and Half-Hidden */}
-            <div className="absolute left-0 top-[7%] -translate-x-[45%] w-[350px] h-[350px] md:w-[600px] md:h-[600px] pointer-events-none opacity-90 hidden sm:block z-0">
-              <Image
-                src="/block.svg"
-                alt=""
-                fill
-                priority
-                aria-hidden
-                style={{ objectFit: "contain", transform: "scaleX(-1)" }}
-              />
-            </div>
-            <div className="absolute right-0 top-[-5%] translate-x-[55%] w-[350px] h-[350px] md:w-[600px] md:h-[600px] pointer-events-none opacity-90 hidden sm:block z-0">
+            {/* Ambient Background Blurred Blocks - Floating out-of-focus clouds */}
+            <motion.div
+              className="absolute left-[5%] top-[15%] w-[350px] h-[350px] pointer-events-none opacity-10 md:opacity-30 blur-md md:blur-lg z-0"
+              animate={{
+                y: [0, -14, 10, -6, 0],
+                x: [0, 8, -6, 4, 0],
+                scale: [1, 1.05, 0.96, 1.02, 1],
+                rotate: [-15, -12, -18, -14, -15],
+              }}
+              transition={{
+                duration: 16,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+            >
               <Image
                 src="/block.svg"
                 alt=""
@@ -209,6 +151,187 @@ export default function HomeClient() {
                 aria-hidden
                 style={{ objectFit: "contain" }}
               />
+            </motion.div>
+            <motion.div
+              className="absolute left-[25%] top-[-10%] w-[250px] h-[250px] pointer-events-none opacity-15 md:opacity-40 blur-sm md:blur-md z-0"
+              animate={{
+                y: [0, 12, -10, 6, 0],
+                x: [0, -8, 6, -4, 0],
+                scale: [1, 0.95, 1.06, 0.98, 1],
+                rotate: [45, 48, 42, 46, 45],
+              }}
+              transition={{
+                duration: 14,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: 0.5,
+              }}
+            >
+              <Image
+                src="/block.svg"
+                alt=""
+                fill
+                priority
+                aria-hidden
+                style={{ objectFit: "contain" }}
+              />
+            </motion.div>
+            <motion.div
+              className="absolute left-[30%] bottom-[5%] w-[400px] h-[400px] pointer-events-none opacity-10 md:opacity-20 blur-lg md:blur-xl z-0"
+              animate={{
+                y: [0, -18, 12, -8, 0],
+                x: [0, 10, -10, 6, 0],
+                scale: [1, 1.07, 0.94, 1.02, 1],
+                rotate: [90, 94, 87, 91, 90],
+              }}
+              transition={{
+                duration: 19,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: 1.2,
+              }}
+            >
+              <Image
+                src="/block.svg"
+                alt=""
+                fill
+                priority
+                aria-hidden
+                style={{ objectFit: "contain" }}
+              />
+            </motion.div>
+            <motion.div
+              className="absolute right-[10%] top-[-5%] w-[300px] h-[300px] pointer-events-none opacity-10 md:opacity-30 blur-md md:blur-lg z-0"
+              animate={{
+                y: [0, 15, -12, 8, 0],
+                x: [0, -10, 8, -5, 0],
+                scale: [1, 0.96, 1.06, 0.98, 1],
+                rotate: [-45, -42, -49, -44, -45],
+              }}
+              transition={{
+                duration: 15,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: 0.8,
+              }}
+            >
+              <Image
+                src="/block.svg"
+                alt=""
+                fill
+                priority
+                aria-hidden
+                style={{ objectFit: "contain" }}
+              />
+            </motion.div>
+            <motion.div
+              className="absolute right-[25%] bottom-[15%] w-[280px] h-[280px] pointer-events-none opacity-15 md:opacity-40 blur-sm md:blur-md z-0"
+              animate={{
+                y: [0, -12, 14, -8, 0],
+                x: [0, 8, -6, 5, 0],
+                scale: [1, 1.06, 0.95, 1.03, 1],
+                rotate: [120, 124, 116, 121, 120],
+              }}
+              transition={{
+                duration: 17,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: 1.5,
+              }}
+            >
+              <Image
+                src="/block.svg"
+                alt=""
+                fill
+                priority
+                aria-hidden
+                style={{ objectFit: "contain" }}
+              />
+            </motion.div>
+            <motion.div
+              className="absolute right-[15%] top-[35%] w-[350px] h-[350px] pointer-events-none opacity-10 md:opacity-20 blur-lg md:blur-xl z-0"
+              animate={{
+                y: [0, 14, -15, 8, 0],
+                x: [0, -10, 8, -4, 0],
+                scale: [1, 0.96, 1.06, 0.98, 1],
+                rotate: [180, 184, 176, 181, 180],
+              }}
+              transition={{
+                duration: 18,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: 2,
+              }}
+            >
+              <Image
+                src="/block.svg"
+                alt=""
+                fill
+                priority
+                aria-hidden
+                style={{ objectFit: "contain" }}
+              />
+            </motion.div>
+
+            {/* Sharp Edge Foreground Blocks - Left & Right Side Clouds in Organic Motion */}
+            <div className="absolute left-0 top-[7%] -translate-x-[45%] w-[350px] h-[350px] md:w-[600px] md:h-[600px] pointer-events-none opacity-90 hidden sm:block z-0">
+              <motion.div
+                className="w-full h-full relative"
+                animate={{
+                  y: [0, -22, 14, -8, 0],
+                  x: [0, 12, -10, 6, 0],
+                  rotate: [0, 2.8, -2.2, 1.2, 0],
+                  scaleX: [-1, -1.06, -0.95, -1.02, -1],
+                  scaleY: [1, 0.94, 1.06, 0.98, 1],
+                  skewX: [0, 2, -1.8, 1, 0],
+                  skewY: [0, -1.6, 2.2, -0.8, 0],
+                  opacity: [0.88, 0.96, 0.9, 0.95, 0.88],
+                }}
+                transition={{
+                  duration: 11,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+              >
+                <Image
+                  src="/block.svg"
+                  alt=""
+                  fill
+                  priority
+                  aria-hidden
+                  style={{ objectFit: "contain" }}
+                />
+              </motion.div>
+            </div>
+            <div className="absolute right-0 top-[-5%] translate-x-[55%] w-[350px] h-[350px] md:w-[600px] md:h-[600px] pointer-events-none opacity-90 hidden sm:block z-0">
+              <motion.div
+                className="w-full h-full relative"
+                animate={{
+                  y: [0, 20, -16, 10, 0],
+                  x: [0, -12, 12, -7, 0],
+                  rotate: [0, -3.2, 2.4, -1.4, 0],
+                  scaleX: [1, 0.94, 1.07, 0.97, 1],
+                  scaleY: [1, 1.06, 0.94, 1.02, 1],
+                  skewX: [0, -2.2, 1.8, -1, 0],
+                  skewY: [0, 1.8, -2, 0.8, 0],
+                  opacity: [0.9, 0.86, 0.96, 0.89, 0.9],
+                }}
+                transition={{
+                  duration: 13,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                  delay: 0.9,
+                }}
+              >
+                <Image
+                  src="/block.svg"
+                  alt=""
+                  fill
+                  priority
+                  aria-hidden
+                  style={{ objectFit: "contain" }}
+                />
+              </motion.div>
             </div>
 
             <div className="relative z-10 max-w-4xl mx-auto flex flex-col items-center w-full">
