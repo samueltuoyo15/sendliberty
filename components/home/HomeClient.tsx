@@ -1,7 +1,7 @@
 "use client";
 
+import CodeSnippetSection from "@/components/home/CodeSnippetSection";
 import { useMe } from "@/hooks/useAuth";
-import { CodeTab, getCodeSnippet } from "@/utils/codeSnippets";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -22,9 +22,6 @@ export default function HomeClient() {
     }
   }, []);
 
-  const [activeTab, setActiveTab] = useState<CodeTab>("curl");
-  const [isExpanded, setIsExpanded] = useState(false);
-  const [isCopied, setIsCopied] = useState(false);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   const rotatingWords = [
@@ -100,25 +97,6 @@ export default function HomeClient() {
         "We never see, ask for, or store your Google password. Authorization is done entirely through standard, secure Google OAuth2 credentials. We only store encrypted access and refresh tokens, which you can manually revoke from your Google Account settings page at any time.",
     },
   ];
-
-  const handleCopyCode = () => {
-    const code = getCodeSnippet(activeTab, isExpanded, apiUrl);
-    if (navigator.clipboard && window.isSecureContext) {
-      navigator.clipboard.writeText(code);
-    } else {
-      const textArea = document.createElement("textarea");
-      textArea.value = code;
-      textArea.style.position = "fixed";
-      textArea.style.left = "-999999px";
-      document.body.appendChild(textArea);
-      textArea.focus();
-      textArea.select();
-      document.execCommand("copy");
-      textArea.remove();
-    }
-    setIsCopied(true);
-    setTimeout(() => setIsCopied(false), 2000);
-  };
 
   return (
     <div className="w-full flex flex-col min-h-screen bg-background-sendlib text-on-background font-body-md overflow-x-hidden">
@@ -393,64 +371,7 @@ export default function HomeClient() {
         </section>
 
         {/* Code Snippet Section */}
-        <section className="w-full bg-background-sendlib pb-24 px-margin-mobile md:px-margin-desktop relative z-20">
-          <div className="max-w-6xl mx-auto">
-            <div className="w-full bg-[#090a0f] text-white rounded-2xl font-mono border border-zinc-800 overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.8)] flex flex-col transition-all hover:border-zinc-700 text-left">
-              <div className="flex justify-between items-center px-4 py-3 bg-[#12131a] border-b border-zinc-800 gap-2">
-                <div className="flex items-center rounded-xl bg-[#07080c] border border-zinc-800/80 p-1 text-xs overflow-x-auto max-w-full flex-1 [ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-                  {(["curl", "js", "python", "go", "rust", "php", "net", "java"] as const).map(
-                    (tab) => (
-                      <button
-                        key={tab}
-                        onClick={() => setActiveTab(tab)}
-                        className={`px-3 py-1.5 rounded-lg transition-all cursor-pointer whitespace-nowrap font-sans text-xs md:text-sm font-medium ${
-                          activeTab === tab
-                            ? "bg-zinc-800 text-white shadow-sm font-bold"
-                            : "text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800/50"
-                        }`}
-                      >
-                        {tab === "curl"
-                          ? "cURL"
-                          : tab === "js"
-                            ? "JavaScript"
-                            : tab === "python"
-                              ? "Python"
-                              : tab === "go"
-                                ? "Go"
-                                : tab === "rust"
-                                  ? "Rust"
-                                  : tab === "php"
-                                    ? "PHP"
-                                    : tab === "net"
-                                      ? ".NET"
-                                      : "Java"}
-                      </button>
-                    )
-                  )}
-                </div>
-                <button
-                  onClick={handleCopyCode}
-                  className="text-xs md:text-sm font-sans font-medium text-zinc-300 hover:text-white bg-[#07080c] border border-zinc-800 hover:bg-zinc-800 px-4 py-2 rounded-lg transition-colors cursor-pointer flex items-center gap-1.5 shrink-0"
-                >
-                  {isCopied ? "✓ Copied" : "Copy Code"}
-                </button>
-              </div>
-              <pre className="text-xs md:text-[15px] overflow-auto max-h-[500px] leading-loose text-white p-6 md:p-8 custom-scrollbar font-mono">
-                {getCodeSnippet(activeTab, isExpanded, apiUrl)}
-              </pre>
-              <div className="flex justify-between items-center border-t border-zinc-800 text-xs px-6 py-4 bg-[#12131a]">
-                <button
-                  onClick={() => setIsExpanded(!isExpanded)}
-                  className="text-emerald-400 hover:text-emerald-300 font-medium cursor-pointer flex items-center gap-1.5 transition-colors outline-none font-sans"
-                >
-                  {isExpanded
-                    ? "Collapse Parameters ▲"
-                    : "Show All Parameters (CC, BCC, Attachments) ▼"}
-                </button>
-              </div>
-            </div>
-          </div>
-        </section>
+        <CodeSnippetSection apiUrl={apiUrl} />
 
         {/* Comparison Table */}
         <section
